@@ -6,12 +6,43 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Js EXAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .user-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .user-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            width: calc(50% - 20px);
+        }
+        .user-card button {
+            display: block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .user-card button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
 <div id="UsersInformation">
 </div>
-<button>Details</button>
+
 
 <script>
     async function fetchUsers() {
@@ -26,11 +57,14 @@
                 userDiv.innerHTML = `
                         <p>ID: ${user.id}</p>
                         <p>Name: ${user.name}</p>
-                        <button onclick="viewDetails(${user.id})">View Details</button>`;
+                       <button onclick="viewDetails(${user.id})">View Details</button>`
 
                 usersContainer.appendChild(userDiv);
             });
-        } catch {
+        }
+
+
+        catch {
             console.error('Error users:', error);
         }
     }
