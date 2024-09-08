@@ -6,7 +6,7 @@
   <title>Post Details</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial;
       margin: 20px;
     }
     #post-details {
@@ -25,11 +25,14 @@
     }
     .comments-container {
       display: flex;
+      /*flex-wrap: wrap;*/
+      justify-content: center;
+      gap: 80px;
       flex-wrap: wrap;
-      gap: 10px;
+      padding-top: 0;
     }
     .comment {
-      width: calc(25% - 10px); /* 4 in a row */
+      width: 350px;
     }
   </style>
 </head>
@@ -37,7 +40,7 @@
 <h1>Post Details</h1>
 <div id="post-details"></div>
 <h2>Comments</h2>
-<div id="comments-list"></div>
+<div id="comments-list" class="comments-container"></div>
 
 <script>
   function getPostIdFromUrl() {
@@ -53,11 +56,9 @@
         throw new Error('Post ID not found in URL');
       }
 
-      // Fetch post details
       const postResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
       const post = await postResponse.json();
 
-      // Display post details
       const postDetailsDiv = document.getElementById('post-details');
       postDetailsDiv.innerHTML = `
                     <p>ID: ${post.id}</p>
@@ -66,7 +67,6 @@
                     <p>User ID: ${post.userId}</p>
                 `;
 
-      // Fetch and display comments
       await fetchComments(postId);
     } catch (error) {
       console.error('Error fetching post details:', error);
@@ -78,14 +78,14 @@
       const commentsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
       const comments = await commentsResponse.json();
 
-      // Display comments
       const commentsListDiv = document.getElementById('comments-list');
-      commentsListDiv.innerHTML = '';
+      commentsListDiv.innerHTML = ``;
 
-      comments.forEach(comment => {
-        const commentDiv = document.createElement('div');
-        commentDiv.classList.add('comment');
-        commentDiv.innerHTML = `
+
+                    comments.forEach(comment => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
+                    commentDiv.innerHTML = `
                         <p><strong>ID:</strong> ${comment.id}</p>
                         <p><strong>Name:</strong> ${comment.name}</p>
                         <p><strong>Email:</strong> ${comment.email}</p>

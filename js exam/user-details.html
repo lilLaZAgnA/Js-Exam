@@ -31,22 +31,29 @@
             background-color: #0056b3;
         }
         #posts-list {
-            margin-top: 20px;
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            flex-wrap: wrap;
         }
         .post-card {
             border: 1px solid #ddd;
             border-radius: 5px;
-            padding: 10px;
+            padding: 40px;
             margin-bottom: 10px;
             background-color: #f9f9f9;
+            width: 300px;
         }
+
         .post-card a {
             text-decoration: none;
-            color: #007bff;
+            color: black;
         }
         .post-card a:hover {
-            text-decoration: underline;
+
         }
+
     </style>
 </head>
 <body>
@@ -97,10 +104,11 @@
             const posts = await response.json();
 
             const postsListDiv = document.getElementById('posts-list');
-            postsListDiv.innerHTML = '<h2>User Posts</h2>';
+            postsListDiv.innerHTML = '<h2 style="height: 4px">User Posts</h2>';
 
             posts.forEach(post => {
                 const postDiv = document.createElement('div');
+                postDiv.classList.add('post-card')
                 postDiv.innerHTML = `
                         <p>Title: ${post.title}</p>
                         <a href="post-details.html?id=${post.id}" class="post-button">View Post</a>

@@ -12,16 +12,20 @@
             margin: 20px;
         }
         .user-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: 300px 150px;
+
+            gap: 60px;
+
+
         }
         .user-card {
             border: 1px solid #ddd;
             border-radius: 5px;
-            padding: 15px;
+            padding: 20px;
             background-color: #f9f9f9;
-            width: calc(50% - 20px);
+            width: 300px
+
         }
         .user-card button {
             display: block;
@@ -40,7 +44,7 @@
 </head>
 <body>
 
-<div id="UsersInformation">
+<div id="UsersInformation" class="user-container" >
 </div>
 
 
@@ -54,6 +58,7 @@
 
             users.forEach(user => {
                 const userDiv = document.createElement('div');
+                userDiv.classList.add('user-card')
                 userDiv.innerHTML = `
                         <p>ID: ${user.id}</p>
                         <p>Name: ${user.name}</p>
